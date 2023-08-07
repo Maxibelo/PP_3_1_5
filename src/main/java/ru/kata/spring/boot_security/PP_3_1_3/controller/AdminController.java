@@ -36,7 +36,7 @@ public class AdminController {
         return "usersList";
     }
 
-    //@GetMapping("/{id}")
+    
     @GetMapping("/admin/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.show(id));
