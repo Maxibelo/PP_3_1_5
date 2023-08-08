@@ -23,8 +23,7 @@ public class AdminController {
     public AdminController(RolesService rolesService, UserService userService, RoleRepository roleRepository) {
         this.rolesService = rolesService;
         this.userService = userService;
-        this.roleRepository = roleRepository;
-        //this.userValidator = userValidator;
+        this.roleRepository = roleRepository;      
     }
 
     @GetMapping("/admin")
@@ -71,9 +70,7 @@ public class AdminController {
 
     @PostMapping("/admin/user")
     public String create(@ModelAttribute("user") @Valid User user,
-                         BindingResult bindingResult) {
-
-        //userValidator.validate(user, bindingResult);
+                         BindingResult bindingResult) {      
 
         if (bindingResult.hasErrors())
             return "/new";
