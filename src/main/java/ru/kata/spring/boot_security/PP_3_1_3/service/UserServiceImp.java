@@ -46,7 +46,7 @@ public class UserServiceImp implements UserService {
     public User showOne(Principal principal) throws UsernameNotFoundException {
 
         Optional<User> user = userRepository.findByUsername(principal.getName());
-        System.out.println("getUserByName in SERVICE COMPLITE");
+       
         if (user.isEmpty()) {
             throw new UsernameNotFoundException("User not found");
         }
