@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
 
-                .antMatchers("/", "/index", "/registration").permitAll()
+                .antMatchers("/", "/index").permitAll()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/user/**").hasAnyAuthority("ADMIN", "USER")
                 .anyRequest().authenticated()
@@ -51,7 +51,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        //auth.authenticationProvider(authProvider);
         auth.userDetailsService(usersDetailsService).passwordEncoder(getPasswordEncoder());
     }
 

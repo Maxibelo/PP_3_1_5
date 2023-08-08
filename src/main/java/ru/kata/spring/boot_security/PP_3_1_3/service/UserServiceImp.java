@@ -1,23 +1,23 @@
 package ru.kata.spring.boot_security.PP_3_1_3.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import org.springframework.validation.annotation.Validated;
 import ru.kata.spring.boot_security.PP_3_1_3.model.User;
-import ru.kata.spring.boot_security.PP_3_1_3.model.Role;
 import ru.kata.spring.boot_security.PP_3_1_3.repository.RoleRepository;
 import ru.kata.spring.boot_security.PP_3_1_3.repository.UserRepository;
-import ru.kata.spring.boot_security.PP_3_1_3.security.UsersDetails;
 
-
+import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
+@Validated
 public class UserServiceImp implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -41,9 +41,16 @@ public class UserServiceImp implements UserService {
         return userRepository.findById((long)id).orElseThrow();
     }
 
-    public User showOne() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return ((UsersDetails) authentication.getPrincipal()).getUser();
+    @Override
+
+    public User showOne(Principal principal) throws UsernameNotFoundException {
+
+        Optional<User> user = userRepository.findByUsername(principal.getName());
+        System.out.println("getUserByName in SERVICE COMPLITE");
+        if (user.isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user.get();
     }
 
     @Transactional
@@ -57,11 +64,10 @@ public class UserServiceImp implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
-
+    @Transactional
     @Override
     public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
-
 }

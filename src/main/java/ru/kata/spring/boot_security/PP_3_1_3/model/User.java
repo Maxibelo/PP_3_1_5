@@ -1,21 +1,20 @@
 package ru.kata.spring.boot_security.PP_3_1_3.model;
 
-import lombok.Data;
 import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 
 @Entity
 @Table(name="users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @Column(name="id")
@@ -24,27 +23,30 @@ public class User {
 
 
     @Getter
-    @NotEmpty(message = "Имя не должно быть пустым")
-    @Size(min = 2, max = 100, message = "Имя должно быть от 2 до 100 символов длиной")
+    @NotEmpty(message = "Поле не должно быть пустым")
+    @Size(min = 2, max = 30, message = "Поле должно быть от 2 до 30 символов длиной")
 
     @Column(name = "username")
     private String username;
 
-
+    @NotEmpty(message = "Поле не должно быть пустым")
+    @Size(min = 2, max = 30, message = "Поле должно быть от 2 до 30 символов длиной")
     @Column(name="first_name")
     private String firstName;
 
-
+    @NotEmpty(message = "Поле не дожно быть пустым")
+    @Size(min = 2, max = 30, message = "Поле должно быть от 2 до 30 символов длиной")
     @Column(name="last_name")
     private String lastName;
 
-
+    @NotEmpty(message = "Поле не дожно быть пустым")
+    @Email
     @Column(name="email")
     private String email;
 
+    @NotEmpty(message = "Поле не дожно быть пустым")
     @Column(name="password")
     private String password;
-
 
     @ManyToMany()
     @JoinTable(name = "user_roles",
@@ -53,8 +55,7 @@ public class User {
     private Set<Role> roles;
 
     public User() {
-
-}
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -67,6 +68,11 @@ public class User {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+        }
 
     public String getPassword() {
         return password;
@@ -90,7 +96,6 @@ public class User {
         this.lastName = lastName;
         this.email = email;
     }
-
     @Override
     public String toString() {
         return "User{" +
@@ -118,6 +123,25 @@ public class User {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -128,5 +152,17 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

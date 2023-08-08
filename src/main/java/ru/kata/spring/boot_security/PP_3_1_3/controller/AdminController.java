@@ -9,7 +9,6 @@ import ru.kata.spring.boot_security.PP_3_1_3.model.User;
 import ru.kata.spring.boot_security.PP_3_1_3.repository.RoleRepository;
 import ru.kata.spring.boot_security.PP_3_1_3.service.RolesService;
 import ru.kata.spring.boot_security.PP_3_1_3.service.UserService;
-import ru.kata.spring.boot_security.PP_3_1_3.util.UserValidator;
 
 import javax.validation.Valid;
 
@@ -18,14 +17,14 @@ public class AdminController {
     private final RolesService rolesService;
     private final UserService userService;
     private final RoleRepository roleRepository;
-    private final UserValidator userValidator;
+
 
     @Autowired
-    public AdminController(RolesService rolesService, UserService userService, RoleRepository roleRepository, UserValidator userValidator) {
+    public AdminController(RolesService rolesService, UserService userService, RoleRepository roleRepository) {
         this.rolesService = rolesService;
         this.userService = userService;
         this.roleRepository = roleRepository;
-        this.userValidator = userValidator;
+        //this.userValidator = userValidator;
     }
 
     @GetMapping("/admin")
@@ -36,7 +35,6 @@ public class AdminController {
         return "usersList";
     }
 
-    //@GetMapping("/{id}")
     @GetMapping("/admin/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.show(id));
@@ -57,8 +55,9 @@ public class AdminController {
     }
 
     @PatchMapping("/admin/{id}")
-    public String update(@ModelAttribute("user") User user) {
-
+    public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "edit";
         userService.update(user);
         return "redirect:/admin";
     }
@@ -73,10 +72,12 @@ public class AdminController {
     @PostMapping("/admin/user")
     public String create(@ModelAttribute("user") @Valid User user,
                          BindingResult bindingResult) {
-        userValidator.validate(user, bindingResult);
+
+        //userValidator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors())
             return "/new";
+
         userService.save(user);
         return "redirect:/admin";
     }

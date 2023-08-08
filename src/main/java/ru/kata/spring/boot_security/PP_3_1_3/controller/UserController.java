@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.kata.spring.boot_security.PP_3_1_3.model.User;
 import ru.kata.spring.boot_security.PP_3_1_3.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -25,8 +26,8 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public String showUserInfo(Model model) {
-        User user = userService.showOne();
+    public String showUserInfo(Principal principal, Model model) {
+        User user = userService.showOne(principal);
         model.addAttribute("user", user);
         return "user";
     }

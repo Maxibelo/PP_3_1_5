@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.PP_3_1_3.model;
 
 import lombok.Data;
 import lombok.Generated;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="roles")
-public class Role {
+public class Role implements GrantedAuthority {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,5 +58,13 @@ public class Role {
                 ", name='" + name + '\'' +
                 //  ", users=" + users +
                 '}';
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }
