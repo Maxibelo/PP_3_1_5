@@ -1,9 +1,9 @@
-package ru.kata.spring.boot_security.PP_3_1_3.service;
+package ru.kata.spring.boot_security.PP_3_1_4.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.kata.spring.boot_security.PP_3_1_3.model.Role;
-import ru.kata.spring.boot_security.PP_3_1_3.repository.RoleRepository;
+import ru.kata.spring.boot_security.PP_3_1_4.model.Role;
+import ru.kata.spring.boot_security.PP_3_1_4.repository.RoleRepository;
 
 import java.util.HashSet;
 import java.util.Set;

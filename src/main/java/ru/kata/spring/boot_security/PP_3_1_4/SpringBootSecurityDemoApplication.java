@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.PP_3_1_3;
+package ru.kata.spring.boot_security.PP_3_1_4;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

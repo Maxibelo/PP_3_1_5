@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.PP_3_1_3.model;
+package ru.kata.spring.boot_security.PP_3_1_4.model;
 
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -34,12 +34,12 @@ public class User implements UserDetails {
     @Column(name="first_name")
     private String firstName;
 
-    @NotEmpty(message = "Поле не дожно быть пустым")
+    @NotEmpty(message = "Поле не должно быть пустым")
     @Size(min = 2, max = 30, message = "Поле должно быть от 2 до 30 символов длиной")
     @Column(name="last_name")
     private String lastName;
 
-    @NotEmpty(message = "Поле не дожно быть пустым")
+    @NotEmpty(message = "Поле не должно быть пустым")
     @Email
     @Column(name="email")
     private String email;
@@ -152,6 +152,14 @@ public class User implements UserDetails {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getStringRole(){
+        StringBuilder result = new StringBuilder();
+        for (Role r : this.roles){
+            result.append(r.toString()).append("      ");
+        }
+        return result.toString();
     }
 
     @Override

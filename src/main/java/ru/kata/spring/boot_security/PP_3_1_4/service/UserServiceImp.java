@@ -1,20 +1,19 @@
-package ru.kata.spring.boot_security.PP_3_1_3.service;
+package ru.kata.spring.boot_security.PP_3_1_4.service;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import org.springframework.validation.annotation.Validated;
-import ru.kata.spring.boot_security.PP_3_1_3.model.User;
-import ru.kata.spring.boot_security.PP_3_1_3.repository.RoleRepository;
-import ru.kata.spring.boot_security.PP_3_1_3.repository.UserRepository;
+import ru.kata.spring.boot_security.PP_3_1_4.model.User;
+import ru.kata.spring.boot_security.PP_3_1_4.repository.RoleRepository;
+import ru.kata.spring.boot_security.PP_3_1_4.repository.UserRepository;
 
-import javax.validation.Valid;
-import java.security.Principal;
+
 import java.util.List;
-import java.util.Optional;
-
 
 @Service
 @Validated
@@ -42,15 +41,9 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-
-    public User showOne(Principal principal) throws UsernameNotFoundException {
-
-        Optional<User> user = userRepository.findByUsername(principal.getName());
-       
-        if (user.isEmpty()) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return user.get();
+    public User showOne() throws UsernameNotFoundException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (User) authentication.getPrincipal();
     }
 
     @Transactional

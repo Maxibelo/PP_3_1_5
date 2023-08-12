@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.PP_3_1_3.service;
+package ru.kata.spring.boot_security.PP_3_1_4.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,11 +6,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import ru.kata.spring.boot_security.PP_3_1_3.model.User;
-import ru.kata.spring.boot_security.PP_3_1_3.repository.UserRepository;
+import ru.kata.spring.boot_security.PP_3_1_4.model.User;
+import ru.kata.spring.boot_security.PP_3_1_4.repository.UserRepository;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 import java.util.Optional;
 
 @Service
@@ -35,8 +34,6 @@ public class UsersDetailsService implements UserDetailsService {
 
         return user.get();
 
-        //return user.get();
-        //return new org.springframework.security.core.userdetails.User(user.getUsername(), new BCryptPasswordEncoder().encode(user.getPassword()), getGrantedAuth(user));
     }
 
 

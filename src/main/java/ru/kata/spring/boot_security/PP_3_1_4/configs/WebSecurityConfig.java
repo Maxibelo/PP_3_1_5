@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.PP_3_1_3.configs;
+package ru.kata.spring.boot_security.PP_3_1_4.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,8 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.kata.spring.boot_security.PP_3_1_3.service.UserServiceImp;
-import ru.kata.spring.boot_security.PP_3_1_3.service.UsersDetailsService;
+import ru.kata.spring.boot_security.PP_3_1_4.service.UsersDetailsService;
 
 @Configuration
 @EnableWebSecurity

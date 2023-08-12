@@ -1,8 +1,7 @@
-package ru.kata.spring.boot_security.PP_3_1_3.service;
+package ru.kata.spring.boot_security.PP_3_1_4.service;
 
-import ru.kata.spring.boot_security.PP_3_1_3.model.User;
+import ru.kata.spring.boot_security.PP_3_1_4.model.User;
 
-import java.security.Principal;
 import java.util.List;
 
 public interface UserService {
@@ -11,7 +10,7 @@ public interface UserService {
 
     User show(int id);
 
-    User showOne(Principal principal);
+    User showOne();
 
     void delete(int id);
 

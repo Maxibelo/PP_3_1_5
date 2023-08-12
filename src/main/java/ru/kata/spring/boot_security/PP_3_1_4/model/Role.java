@@ -1,11 +1,7 @@
-package ru.kata.spring.boot_security.PP_3_1_3.model;
+package ru.kata.spring.boot_security.PP_3_1_4.model;
 
-import lombok.Data;
-import lombok.Generated;
 import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -50,19 +46,11 @@ public class Role implements GrantedAuthority {
         this.users = users;
     }
 
-
     @Override
     public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                //  ", users=" + users +
-                '}';
+        return name;
     }
 
-    /**
-     * @return
-     */
     @Override
     public String getAuthority() {
         return name;
