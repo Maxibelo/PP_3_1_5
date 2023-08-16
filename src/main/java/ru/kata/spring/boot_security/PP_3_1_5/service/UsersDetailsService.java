@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.PP_3_1_4.service;
+package ru.kata.spring.boot_security.PP_3_1_5.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import ru.kata.spring.boot_security.PP_3_1_4.model.User;
-import ru.kata.spring.boot_security.PP_3_1_4.repository.UserRepository;
+import ru.kata.spring.boot_security.PP_3_1_5.model.User;
+import ru.kata.spring.boot_security.PP_3_1_5.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.Optional;

@@ -1,6 +1,6 @@
-package ru.kata.spring.boot_security.PP_3_1_4.service;
+package ru.kata.spring.boot_security.PP_3_1_5.service;
 
-import ru.kata.spring.boot_security.PP_3_1_4.model.User;
+import ru.kata.spring.boot_security.PP_3_1_5.model.User;
 
 import java.util.List;
 

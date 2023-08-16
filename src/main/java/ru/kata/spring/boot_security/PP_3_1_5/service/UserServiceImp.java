@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.PP_3_1_4.service;
+package ru.kata.spring.boot_security.PP_3_1_5.service;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import org.springframework.validation.annotation.Validated;
-import ru.kata.spring.boot_security.PP_3_1_4.model.User;
-import ru.kata.spring.boot_security.PP_3_1_4.repository.RoleRepository;
-import ru.kata.spring.boot_security.PP_3_1_4.repository.UserRepository;
+import ru.kata.spring.boot_security.PP_3_1_5.model.User;
+import ru.kata.spring.boot_security.PP_3_1_5.repository.RoleRepository;
+import ru.kata.spring.boot_security.PP_3_1_5.repository.UserRepository;
 
 
 import java.util.List;
@@ -31,7 +31,6 @@ public class UserServiceImp implements UserService {
 
     @Override
     public List<User> index() {
-
         return userRepository.findAll();
     }
 

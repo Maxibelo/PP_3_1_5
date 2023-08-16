@@ -1,5 +1,6 @@
-package ru.kata.spring.boot_security.PP_3_1_4.model;
+package ru.kata.spring.boot_security.PP_3_1_5.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import java.util.Set;
@@ -19,6 +20,7 @@ public class Role implements GrantedAuthority {
     public Role(String name) {
         this.name = name;
     }
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 

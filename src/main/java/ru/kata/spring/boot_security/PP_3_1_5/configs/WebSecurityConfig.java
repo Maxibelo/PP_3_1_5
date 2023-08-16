@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.PP_3_1_4.configs;
+package ru.kata.spring.boot_security.PP_3_1_5.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.kata.spring.boot_security.PP_3_1_4.service.UsersDetailsService;
+import ru.kata.spring.boot_security.PP_3_1_5.service.UsersDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -29,10 +29,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-
-                .antMatchers("/", "/index").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/").permitAll()
+                .antMatchers("/admin/**","/api/**", "/active").hasAuthority("ADMIN")
                 .antMatchers("/user/**").hasAnyAuthority("ADMIN", "USER")
                 .anyRequest().authenticated()
                 .and()

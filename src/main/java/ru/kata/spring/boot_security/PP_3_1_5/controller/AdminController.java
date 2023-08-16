@@ -1,14 +1,13 @@
-package ru.kata.spring.boot_security.PP_3_1_4.controller;
-
+package ru.kata.spring.boot_security.PP_3_1_5.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.kata.spring.boot_security.PP_3_1_4.model.User;
-import ru.kata.spring.boot_security.PP_3_1_4.repository.RoleRepository;
-import ru.kata.spring.boot_security.PP_3_1_4.service.RolesService;
-import ru.kata.spring.boot_security.PP_3_1_4.service.UserService;
+import ru.kata.spring.boot_security.PP_3_1_5.model.User;
+import ru.kata.spring.boot_security.PP_3_1_5.repository.RoleRepository;
+import ru.kata.spring.boot_security.PP_3_1_5.service.RolesService;
+import ru.kata.spring.boot_security.PP_3_1_5.service.UserService;
 
 import javax.validation.Valid;
 
@@ -29,20 +28,13 @@ public class AdminController {
     @GetMapping("/admin")
 
     public String index(Model model) {
-
         model.addAttribute("authUser", userService.showOne());
         model.addAttribute("users", userService.index());
         model.addAttribute("newUser", new User());
         model.addAttribute("allRoles", rolesService.getRoles());
-
         return "admin";
     }
-    @GetMapping("/adminUser")
-    public String adminUser(Model model) {
-        User user = userService.showOne();
-        model.addAttribute("user", user);
-        return "adminUser";
-    }
+
 
     @DeleteMapping("/admin/{id}")
     public String delete(@PathVariable("id") int id) {
@@ -69,3 +61,5 @@ public class AdminController {
         return "redirect:/admin";
     }
 }
+
+

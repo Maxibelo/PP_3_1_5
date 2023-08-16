@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.PP_3_1_4.model;
+package ru.kata.spring.boot_security.PP_3_1_5.model;
 
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;

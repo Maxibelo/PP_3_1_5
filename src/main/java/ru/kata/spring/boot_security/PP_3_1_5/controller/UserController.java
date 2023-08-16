@@ -1,12 +1,14 @@
-package ru.kata.spring.boot_security.PP_3_1_4.controller;
+
+package ru.kata.spring.boot_security.PP_3_1_5.controller;
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.kata.spring.boot_security.PP_3_1_4.model.User;
-import ru.kata.spring.boot_security.PP_3_1_4.service.UserService;
+import ru.kata.spring.boot_security.PP_3_1_5.model.User;
+import ru.kata.spring.boot_security.PP_3_1_5.service.UserService;
 
 @Controller
 public class UserController {
