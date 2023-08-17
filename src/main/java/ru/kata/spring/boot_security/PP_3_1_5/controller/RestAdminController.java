@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.kata.spring.boot_security.PP_3_1_5.model.Role;
 import ru.kata.spring.boot_security.PP_3_1_5.model.User;
-import ru.kata.spring.boot_security.PP_3_1_5.repository.RoleRepository;
 import ru.kata.spring.boot_security.PP_3_1_5.service.RolesService;
 import ru.kata.spring.boot_security.PP_3_1_5.service.UserService;
 
@@ -20,24 +19,21 @@ import java.util.Set;
 public class RestAdminController {
     private final RolesService rolesService;
     private final UserService userService;
-    private final RoleRepository roleRepository;
 
     @Autowired
-    public RestAdminController(RolesService rolesService, UserService userService, RoleRepository roleRepository) {
+    public RestAdminController(RolesService rolesService, UserService userService) {
         this.rolesService = rolesService;
         this.userService = userService;
-        this.roleRepository = roleRepository;
     }
 
     @GetMapping("/admin")
-    public List<User> getAll() {
+    public ResponseEntity<List<User>> getAll() {
         List<User> allUsers = userService.index();
-        return new ResponseEntity<>(allUsers, HttpStatus.OK).getBody();
+        return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getOne(@PathVariable("id") Long id) {
-
         User user = userService.show(Math.toIntExact(id));
         return ResponseEntity.ok(user);
     }
@@ -49,22 +45,21 @@ public class RestAdminController {
     }
 
     @PutMapping("/users")
-    public User update(@RequestBody User user) {
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
         userService.update(user);
-        return ResponseEntity.ok(user).getBody();
+        return ResponseEntity.ok(user);
     }
 
 
     @DeleteMapping("/users/{id}")
-    public String delete(@PathVariable("id") int id) {
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") int id){
         userService.delete(id);
-        return "User with id = " + id + " was deleted";
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping("/roles")
     public Set<Role> allRoles() {
         Set<Role> roleList = rolesService.getRoles();
-        System.out.println(roleList);
-        return roleList;
+        return ResponseEntity.ok(roleList).getBody();
     }
 }

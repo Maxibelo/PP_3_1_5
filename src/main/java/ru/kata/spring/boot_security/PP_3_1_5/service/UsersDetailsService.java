@@ -33,8 +33,5 @@ public class UsersDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found!");
 
         return user.get();
-
     }
-
-
 }

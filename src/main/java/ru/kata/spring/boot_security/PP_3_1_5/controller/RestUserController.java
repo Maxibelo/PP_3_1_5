@@ -14,7 +14,6 @@ public class RestUserController {
 
     @GetMapping("")
     public ResponseEntity<UserDetails> showUser() {
-        System.out.println("ShowUserRest");
         UserDetails myUserDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return ResponseEntity.ok(myUserDetails);
     }

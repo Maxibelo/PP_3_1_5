@@ -1,4 +1,5 @@
 package ru.kata.spring.boot_security.PP_3_1_5.controller;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -15,26 +16,22 @@ import javax.validation.Valid;
 public class AdminController {
     private final RolesService rolesService;
     private final UserService userService;
-    private final RoleRepository roleRepository;
-
 
     @Autowired
-    public AdminController(RolesService rolesService, UserService userService, RoleRepository roleRepository) {
+    public AdminController(RolesService rolesService, UserService userService) {
         this.rolesService = rolesService;
         this.userService = userService;
-        this.roleRepository = roleRepository;
     }
 
     @GetMapping("/admin")
 
-    public String index(Model model) {
-        model.addAttribute("authUser", userService.showOne());
+    public String index(Model model, @AuthenticationPrincipal User user) {
+        model.addAttribute("authUser", user);
         model.addAttribute("users", userService.index());
         model.addAttribute("newUser", new User());
         model.addAttribute("allRoles", rolesService.getRoles());
         return "admin";
     }
-
 
     @DeleteMapping("/admin/{id}")
     public String delete(@PathVariable("id") int id) {
